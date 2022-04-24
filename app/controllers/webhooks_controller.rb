@@ -20,7 +20,7 @@ class WebhooksController < ApplicationController
       return
     end
 
-    # Handle the event
+    # Handle the event by event type
     case event.type
     when 'checkout.session.completed'
       session = event.data.object
