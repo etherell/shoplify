@@ -9,9 +9,7 @@ class CheckoutController < ApplicationController
       payment_method_types: ['card'],
       line_items: [{
         # Sets product information to session
-        name: product.name,
-        amount: product.price,
-        currency: "usd",
+        price: product.stripe_price_id,
         quantity: 1
       }],
       mode: 'payment',
