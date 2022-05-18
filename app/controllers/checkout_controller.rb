@@ -14,13 +14,18 @@ class CheckoutController < ApplicationController
       }],
       mode: 'payment',
       # Redirect after success
-      success_url: root_url + "?session_id={CHECKOUT_SESSION_ID}",
+      success_url: success_url + "?session_id={CHECKOUT_SESSION_ID}",
       # Redirect after failure
-      cancel_url: root_url,
+      cancel_url: cancel_url,
     })
     respond_to do |format|
       format.js
     end
   end
 
+  def success
+  end
+
+  def cancel
+  end
 end
