@@ -7,6 +7,7 @@ class CheckoutController < ApplicationController
       # Sets payment method types
       payment_method_types: ['card'],
       line_items: @cart.map { |item| item.to_builder.attributes! },
+      allow_promotion_codes: true,
       mode: 'payment',
       # Redirect after success
       success_url: success_url + "?session_id={CHECKOUT_SESSION_ID}",
