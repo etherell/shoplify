@@ -16,7 +16,7 @@ class Product < ApplicationRecord
     # Creates product inside stripe
     product = Stripe::Product.create(name: name)
     # Creates price for stripe product (product can have many prices)
-    price = Stripe::Price.create(product: product, unit_amount: self.price, currency: 'usd')
+    price = Stripe::Price.create(product: product, unit_amount: self.price, currency: self.currency)
     # Adds stripe product id and stripe_price_id to DB
     update(stripe_product_id: product.id, stripe_price_id: price.id)
   end
@@ -25,7 +25,7 @@ class Product < ApplicationRecord
   after_update :create_and_assign_new_stripe_price, if: :saved_change_to_price?
 
   def create_and_assign_new_stripe_price
-    price = Stripe::Price.create(product: self.stripe_product_id, unit_amount: self.price, currency: 'usd')
+    price = Stripe::Price.create(product: self.stripe_product_id, unit_amount: self.price, currency: self.currency)
     update(stripe_price_id: price.id)
   end
 end
