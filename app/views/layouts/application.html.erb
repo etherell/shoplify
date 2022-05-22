@@ -27,6 +27,9 @@
     <% @cart.each do |product| %>
       <%= product.name %>
     <% end %>
+    <% if @cart.present? %>
+      <%= button_to 'Buy now!', checkout_create_path, remote: true, data: { disable_with: "validating..." } %>
+    <% end %>
     <hr>
     <%= yield %>
   </body>

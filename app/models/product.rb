@@ -5,6 +5,13 @@ class Product < ApplicationRecord
     name
   end
 
+  def to_builder
+    Jbuilder.new do |product|
+      product.price stripe_price_id
+      product.quantity 1
+    end
+  end
+
   after_create do
     # Creates product inside stripe
     product = Stripe::Product.create(name: name)
